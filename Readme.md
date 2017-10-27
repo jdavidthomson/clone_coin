@@ -2,6 +2,10 @@
 # Clone Coin Script #
 #####################
 
+Preface
+=======
+I have spent the past few weeks messing around with the Bitcoin sourcecode.  In my exercises I have figured out how to make a new genesis block, and get it working with Bitcoind as the daemon process, in effect making a new blockchain based on Bitcoin.  Now, DISCLAIMER:  I HAVE ONLY A SLIGHT IDEA OF WHAT I'M DOING.  USE THIS ALL AT YOUR OWN RISK.
+
 UNTESTED - draft of code
 =====================
 
