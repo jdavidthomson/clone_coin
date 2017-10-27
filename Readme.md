@@ -2,6 +2,9 @@
 # Clone Coin Script #
 #####################
 
+UNTESTED - draft of code
+=====================
+
 The purpose of this script is to take the bitcoin reference client and make a new "cryptocurrency".
 
 This is done by following these steps:
@@ -21,3 +24,6 @@ Notes:
 Requirements:
 python-pip: sudo apt install python-pip
 libssl-dev: sudo apt install libssl-dev 
+
+Compatability:
+bitcoin 0.15.0.1
