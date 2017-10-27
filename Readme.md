@@ -16,6 +16,7 @@ This is done by following these steps:
 6) Get a new address using RPC commands
 7) Generate 1 block using RPC commands 
 8) Mine 100 more blocks using CGMiner
+	- my github has a link to a script for building CGMiner for bitcoin mining using a GPU
 9) Deploy the blockchain to three or more servers
 
 Notes:
