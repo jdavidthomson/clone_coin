@@ -23,8 +23,8 @@ Notes:
 1) The parameters inside of the bitcoin reference client stay the same - half lilfe of coins is still the same, difficulty adjustment period stays the same
 
 Requirements:
-python-pip: sudo apt install python-pip
-libssl-dev: sudo apt install libssl-dev 
+- python-pip: sudo apt install python-pip
+- libssl-dev: sudo apt install libssl-dev 
 
 Compatability:
 bitcoin 0.15.0.1
