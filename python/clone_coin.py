@@ -98,8 +98,8 @@ def modify_chainparams_cpp(merkle_hash, pszTimestamp, pubkey, time, bits, nonce,
     print bits
     print nonce
     print genesis_hash
-    with open('./bitcoin/src/chainparams.cpp') as chainparams_src, with open('./bitcoin/src/chainparams_new.cpp','w') as chainparams_dest:
-        for line in chainparams:
+    with open('./bitcoin/src/chainparams.cpp') as chainparams_src, open('./bitcoin/src/chainparams_new.cpp','w') as chainparams_dest:
+        for line in chainparams_src:
             check_line = line.strip()
             if check_line == 'const char* pszTimestamp = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";':
                 check_line = 'const char* pszTimestamp = "' + pszTimestamp + '"'
@@ -107,14 +107,14 @@ def modify_chainparams_cpp(merkle_hash, pszTimestamp, pubkey, time, bits, nonce,
                 check_line = 'const CScript genesisOutputScript = CScript() << ParseHex("' + pubkey + '") << OP_CHECKSIG;'
             elif check_line == 'consensus.BIP34Height = 227931;':
                 check_line = 'consensus.BIP34Height = 0;'
-            elif check_line == 'consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");'
+            elif check_line == 'consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");':
                 check_line = 'consensus.BIP34Hash = uint256S("0x' + genesis_hash + '");'
             elif check_line == 'consensus.BIP65Height = 388381;':
                 check_line = 'consensus.BIP65Height = 1;'
             elif check_line == 'consensus.BIP66Height = 363725;':
                 check_line = 'consensus.BIP66Height = 1;'
             elif check_line == 'consensus.powLimit = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");':
-                check_line = consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+                check_line = 'consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");'
             elif check_line == 'consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008':
                 check_line = 'consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 0;'
             elif check_line == 'consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008':
@@ -141,17 +141,17 @@ def modify_chainparams_cpp(merkle_hash, pszTimestamp, pubkey, time, bits, nonce,
                 check_line = 'assert(consensus.hashGenesisBlock == uint256S("0x' + str(genesis_hash) + '"));'
             elif check_line == 'assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));':
                 check_line = 'assert(genesis.hashMerkleRoot == uint256S("0x' + str(merkle_hash) + '"));'
-            elif check_line == 'vSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd'):
+            elif check_line == 'vSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd':
                 check_line = ''
             elif check_line == 'vSeeds.emplace_back("dnsseed.bluematt.me", true); // Matt Corallo, only supports x9':
                 check_line = ''
-            elif check_line == 'vSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr'
+            elif check_line == 'vSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr':
                 check_line = ''
-            elif check_line == 'vSeeds.emplace_back("seed.bitcoinstats.com", true); // Christian Decker, supports x1 - xf'
+            elif check_line == 'vSeeds.emplace_back("seed.bitcoinstats.com", true); // Christian Decker, supports x1 - xf':
                 checkline = ''
-            elif check_line == 'vSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch", true); // Jonas Schnelli, only supports x1, x5, x9, and xd'               
+            elif check_line == 'vSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch", true); // Jonas Schnelli, only supports x1, x5, x9, and xd':              
                 check_line = ''
-            elif check_line == 'vSeeds.emplace_back("seed.btc.petertodd.org", true); // Peter Todd, only supports x1, x5, x9, and xd'
+            elif check_line == 'vSeeds.emplace_back("seed.btc.petertodd.org", true); // Peter Todd, only supports x1, x5, x9, and xd':
                 check_line = ''
             elif check_line == '{ 11111, uint256S("0x0000000069e244f73d78e8fd29ba2fd2ed618bd6fa2ee92559f542fdb26e7c1d")},':
                 check_line = '{0, uint256S("' + str(genesis_hash) + '")},'
@@ -185,15 +185,10 @@ def modify_chainparams_cpp(merkle_hash, pszTimestamp, pubkey, time, bits, nonce,
                 check_line = '0'
             elif check_line == '//   (the tx=... number in the SetBestChain debug.log lines)':
                 check_line = ''
-            elif check_line == '3.1         // * estimated number of transactions per second after that timestamp'
+            elif check_line == '3.1         // * estimated number of transactions per second after that timestamp':
                 check_line = '0'
 
             chainparams_dest.write(check_line + "\n")
-                
-        
-
-    raise Exception("not implemented yet")
-
 
 if __name__ == "__main__":
     #clone_genesish0()
